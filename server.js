@@ -1,4 +1,5 @@
-require('dotenv').config();
+process.env.GROQ_API_KEY = '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';
+process.env.PORT = '3000';
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
@@ -89,7 +90,8 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
-
-app.listen(PORT, "0.0.0.0", () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+app.listen(PORT, () => {
+  console.log(`\n🚀 UNISELL backend running on http://localhost:${PORT}`);
+  console.log(`   AI proxy (Groq) → POST /api/chat`);
+  console.log(`   Health          → GET  /health\n`);
 });
