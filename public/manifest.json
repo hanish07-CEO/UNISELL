@@ -1,5 +1,5 @@
 {
-  "name": "UNISELL — Command Center",
+  "name": "UNISELL \u2014 Command Center",
   "short_name": "UNISELL",
   "description": "AI-Powered E-Commerce Command Center. List Once, Sell Everywhere.",
   "start_url": "/",
@@ -9,7 +9,11 @@
   "orientation": "portrait-primary",
   "scope": "/",
   "lang": "en",
-  "categories": ["business", "productivity", "shopping"],
+  "categories": [
+    "business",
+    "productivity",
+    "shopping"
+  ],
   "icons": [
     {
       "src": "icons/icon-72.png",
@@ -58,6 +62,12 @@
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
+    },
+    {
+      "src": "icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ],
   "shortcuts": [
@@ -66,14 +76,24 @@
       "short_name": "Dashboard",
       "description": "Open your command center",
       "url": "/dashboard.html",
-      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
     },
     {
       "name": "Products",
       "short_name": "Products",
       "description": "Manage your product listings",
       "url": "/dashboard.html#products",
-      "icons": [{ "src": "icons/icon-96.png", "sizes": "96x96" }]
+      "icons": [
+        {
+          "src": "icons/icon-96.png",
+          "sizes": "96x96"
+        }
+      ]
     }
   ],
   "screenshots": [
