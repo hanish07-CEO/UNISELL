@@ -1,5 +1,5 @@
 // UNISELL Service Worker v1.0
-const CACHE_NAME = 'unisell-v1';
+const CACHE_NAME = 'unisell-v3';
 const OFFLINE_URL = '/offline.html';
 
 // Files to cache for offline use

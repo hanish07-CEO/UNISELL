@@ -1,5 +1,4 @@
-process.env.GROQ_API_KEY = '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';
-process.env.PORT = '3000';
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const fetch = require('node-fetch');
