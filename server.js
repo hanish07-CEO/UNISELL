@@ -85,14 +85,14 @@ Your role: Provide sharp, actionable, data-driven advice on inventory management
 });
 
 // ── CATCH-ALL → serve frontend ──
-// Root route (VERY IMPORTANT)
+// HEALTH CHECK (IMPORTANT FOR RAILWAY)
 app.get("/", (req, res) => {
-  res.send("UniSell backend is LIVE 🚀");
+  res.status(200).send("OK");
 });
 
-// Catch-all route
-app.get("*", (req, res) => {
-  res.send("Route working");
+// Optional API check
+app.get("/health", (req, res) => {
+  res.json({ status: "ok" });
 });
 
 
