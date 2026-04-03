@@ -1,11 +1,10 @@
 {
   "name": "unisell-backend",
   "version": "1.0.0",
-  "description": "UNISELL AI-Powered E-Commerce Command Center — Backend Proxy",
+  "description": "UNISELL AI-Powered E-Commerce Command Center",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
-    "dev": "node server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
