@@ -85,8 +85,14 @@ Your role: Provide sharp, actionable, data-driven advice on inventory management
 });
 
 // ── CATCH-ALL → serve frontend ──
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+// Root route (VERY IMPORTANT)
+app.get("/", (req, res) => {
+  res.send("UniSell backend is LIVE 🚀");
+});
+
+// Catch-all route
+app.get("*", (req, res) => {
+  res.send("Route working");
 });
 
 
