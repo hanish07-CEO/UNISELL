@@ -1,19 +1,13 @@
-require('dotenv').config();
 const express = require('express');
 
 const app = express();
 
-// VERY IMPORTANT → root route FIRST
+// ROOT ROUTE (Railway health check)
 app.get("/", (req, res) => {
   res.status(200).send("UniSell backend is LIVE 🚀");
 });
 
-// Simple health route
-app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
-});
-
-// Test API route
+// TEST ROUTE
 app.get("/test", (req, res) => {
   res.json({ message: "API working" });
 });
