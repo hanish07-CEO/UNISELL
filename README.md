@@ -150,4 +150,4 @@ Edit the `systemPrompt` in `server.js` to match your actual store data.
 
 ---
 
-Built with ❤️ for UNISELL · Brandathon 2025
+Built with ❤️ for UNISELL -Hanish
