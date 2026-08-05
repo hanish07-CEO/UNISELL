@@ -30,7 +30,8 @@ The landing page previews the full planned feature set:
 
 ## 🖼️ Screenshot
 
-[Add a screenshot of your dashboard here]
+<img width="1918" height="927" alt="image" src="https://github.com/user-attachments/assets/f514d57b-0a6a-4e5a-ab1b-da5bd209e140" />
+
 
 ---
 
