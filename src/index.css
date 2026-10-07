@@ -1,0 +1,420 @@
+@import "tailwindcss";
+
+:root {
+  --navy: #090d18;
+  --navy-landing: #0b0f1a;
+  --navy-2: #0f1420;
+  --navy-2-landing: #111827;
+  --navy-3: #161d2e;
+  --navy-3-landing: #1a2236;
+  --navy-4: #1c2540;
+  --gold: #c9a84c;
+  --gold-light: #e8c97a;
+  --gold-dim: rgba(201, 168, 76, 0.14);
+  --gold-border: rgba(201, 168, 76, 0.25);
+  --text: #e8e6e0;
+  --text-dim: #8a8c96;
+  --text-mid: #a8aab8;
+  --accent: #4f8ef7;
+  --green: #3ecf8e;
+  --red: #f56565;
+  --blue: #4f8ef7;
+  --orange: #f6a623;
+  --border: rgba(201, 168, 76, 0.2);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--navy);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+}
+
+.font-serif-display {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+}
+
+.font-sans-body {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Noise texture overlay */
+.unisell-noise::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* Orbiting rings */
+@keyframes unisellSpin {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.unisell-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  animation: unisellSpin linear infinite;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.unisell-ring-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  border-radius: 50%;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 10px var(--gold);
+}
+
+/* Infinite ticker */
+@keyframes unisellTicker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.unisell-ticker-track {
+  display: flex;
+  gap: 4rem;
+  width: max-content;
+  animation: unisellTicker 22s linear infinite;
+  white-space: nowrap;
+}
+
+.unisell-ticker-track:hover {
+  animation-play-state: paused;
+}
+
+/* Bar grow animation */
+@keyframes unisellGrowBar {
+  from {
+    transform: scaleY(0);
+    transform-origin: bottom;
+  }
+  to {
+    transform: scaleY(1);
+    transform-origin: bottom;
+  }
+}
+
+.unisell-bar-grow {
+  animation: unisellGrowBar 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Fade up */
+@keyframes unisellFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.unisell-fade-up {
+  animation: unisellFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* Pulse ring */
+@keyframes unisellPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.35);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(201, 168, 76, 0);
+  }
+}
+
+.unisell-pulse {
+  animation: unisellPulse 2.4s ease infinite;
+}
+
+/* Typing indicator dots */
+@keyframes unisellTypingDot {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-5px);
+  }
+}
+
+.unisell-typing-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--text-dim);
+  animation: unisellTypingDot 1.2s ease infinite;
+}
+
+/* Sparkle cursor effect */
+@keyframes unisellSparkle {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0) translate(var(--tx, 15px), var(--ty, -15px));
+    opacity: 0;
+  }
+}
+
+.unisell-sparkle {
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  border-radius: 50%;
+  animation: unisellSparkle 0.6s ease forwards;
+}
+
+/* Floating particles */
+@keyframes unisellFloatParticle {
+  0% {
+    opacity: 0;
+    transform: translateY(100vh) scale(0);
+  }
+  15% {
+    opacity: 0.28;
+  }
+  85% {
+    opacity: 0.12;
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100px) scale(1);
+  }
+}
+
+.unisell-particle {
+  position: fixed;
+  border-radius: 50%;
+  background: var(--gold);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 0;
+  animation: unisellFloatParticle linear infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(201, 168, 76, 0.25);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(201, 168, 76, 0.45);
+}
+
+/* ── MAGIC UI STARTUP TEMPLATE FEATURES ── */
+
+:root {
+  --color-one: #c9a84c;
+  --color-two: #9c40ff;
+  --color-three: #4f8ef7;
+  --shimmer-width: 110px;
+}
+
+@keyframes image-glow {
+  0% {
+    opacity: 0;
+    animation-timing-function: cubic-bezier(0.74, 0.25, 0.76, 1);
+  }
+  10% {
+    opacity: 0.75;
+    animation-timing-function: cubic-bezier(0.12, 0.01, 0.08, 0.99);
+  }
+  100% {
+    opacity: 0.45;
+  }
+}
+
+.animate-image-glow {
+  animation: image-glow 4.1s ease-out 0.5s forwards;
+}
+
+@keyframes shimmer {
+  0%, 90%, 100% {
+    background-position: calc(-100% - var(--shimmer-width, 110px)) 0;
+  }
+  30%, 60% {
+    background-position: calc(100% + var(--shimmer-width, 110px)) 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 6s infinite cubic-bezier(0.6, 0.6, 0, 1);
+}
+
+@keyframes border-beam-travel {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.animate-border-beam {
+  animation: border-beam-travel var(--beam-duration, 12s) linear infinite;
+}
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-100% - var(--gap, 1rem)));
+  }
+}
+
+.animate-marquee {
+  animation: marquee var(--duration, 30s) linear infinite;
+}
+
+.animate-marquee-reverse {
+  animation: marquee var(--duration, 30s) linear infinite reverse;
+}
+
+/* 1. Shimmer text effect */
+@keyframes unisellShimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.unisell-shimmer-text {
+  background: linear-gradient(
+    90deg,
+    rgba(232, 230, 224, 0.55) 0%,
+    #e8c97a 45%,
+    #ffffff 50%,
+    #e8c97a 55%,
+    rgba(232, 230, 224, 0.55) 100%
+  );
+  background-size: 200% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: unisellShimmer 4.5s infinite linear;
+}
+
+/* 2. Animated Border Beam */
+@keyframes unisellBorderSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.unisell-border-beam-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.unisell-border-beam-wrap::before {
+  content: '';
+  position: absolute;
+  inset: -150%;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 290deg,
+    rgba(79, 142, 247, 0.55) 320deg,
+    #c9a84c 348deg,
+    #e8c97a 360deg
+  );
+  animation: unisellBorderSpin 9s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* 3. Multi-row Marquee for CTA background */
+@keyframes unisellMarqueeLeft {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes unisellMarqueeRight {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.unisell-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: unisellMarqueeLeft var(--duration, 28s) linear infinite;
+}
+
+.unisell-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: unisellMarqueeRight var(--duration, 24s) linear infinite;
+}
+
+.unisell-marquee-left:hover,
+.unisell-marquee-right:hover {
+  animation-play-state: paused;
+}
+

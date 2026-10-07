@@ -1,0 +1,6 @@
+{
+  "name": "UNISELL — List Once, Sell Everywhere",
+  "description": "AI-Powered E-Commerce Command Center empowering Indian SMEs to manage Amazon, Flipkart, Meesho & ONDC from a single intelligent dashboard.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
