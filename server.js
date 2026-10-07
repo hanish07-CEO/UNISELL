@@ -1,36 +1,12 @@
-var __create = Object.create;
-var __defProp = Object.defineProperty;
-var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-var __getOwnPropNames = Object.getOwnPropertyNames;
-var __getProtoOf = Object.getPrototypeOf;
-var __hasOwnProp = Object.prototype.hasOwnProperty;
-var __copyProps = (to, from, except, desc) => {
-  if (from && typeof from === "object" || typeof from === "function") {
-    for (let key of __getOwnPropNames(from))
-      if (!__hasOwnProp.call(to, key) && key !== except)
-        __defProp(to, key, { get: () => from[key], enumerable: !(desc = __getOwnPropDesc(from, key)) || desc.enumerable });
-  }
-  return to;
-};
-var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(
-  // If the importer is in node compatibility mode or this is not an ESM
-  // file that has been converted to a CommonJS file using a Babel-
-  // compatible transform (i.e. "__esModule" has not been set), then set
-  // "default" to the CommonJS "module.exports" for node compatibility.
-  isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target,
-  mod
-));
-
 // server.ts
-var import_config = require("dotenv/config");
-var import_express = __toESM(require("express"), 1);
-var import_fs = __toESM(require("fs"), 1);
-var import_path = __toESM(require("path"), 1);
-var import_url = require("url");
-var import_genai = require("@google/genai");
-var import_meta = {};
-var __filename = (0, import_url.fileURLToPath)(import_meta.url);
-var __dirname = import_path.default.dirname(__filename);
+import "dotenv/config";
+import express from "express";
+import fs from "fs";
+import path from "path";
+import { fileURLToPath } from "url";
+import { GoogleGenAI } from "@google/genai";
+var __filename = fileURLToPath(import.meta.url);
+var __dirname = path.dirname(__filename);
 var COMPACT_STORE_CONTEXT = `You are UNISELL AI Assistant for Rahul Mehta's Indian ethnic wear store (Pragati Plan).
 Store stats: Monthly Revenue \u20B94.28L (+18.4% MoM), 347 orders today, 1,284 listings across Amazon India (\u20B91.8L, 43%, 4.4x ROAS), Flipkart (\u20B91.2L, 29%, +22%, 4.1x ROAS), Meesho (\u20B982K, 19%, -3%, 3.2x ROAS), ONDC (\u20B938K, 9%, +41%, 2.8x ROAS).
 SKUs: Banarasi Silk Saree SAR-BNR-001 (\u20B94,299, 4 left LOW STOCK), Handloom Chanderi Dupatta DUP-CHA-004 (\u20B91,299, 0 left OUT OF STOCK, 12 pending orders), Bridal Lehenga Choli Set LEH-BRI-005 (\u20B97,499, 18 left), Cotton Anarkali Kurta KUR-ANK-002 (\u20B91,299, 142 in stock), Woollen Shawl SHA-KSH-006 (\u20B92,899, 6 left).
@@ -148,9 +124,9 @@ async function callGeminiWithTimeout(promise, timeoutMs) {
   });
 }
 async function startServer() {
-  const app = (0, import_express.default)();
+  const app = express();
   const PORT = Number(process.env.PORT) || 3e3;
-  app.use(import_express.default.json());
+  app.use(express.json());
   app.get("/health", (_req, res) => {
     res.json({ status: "ok", app: "UNISELL React + TypeScript" });
   });
@@ -164,7 +140,7 @@ async function startServer() {
     const groqKey = process.env.GROQ_API_KEY;
     if (geminiKey && geminiKey !== "MY_GEMINI_API_KEY") {
       try {
-        const ai = new import_genai.GoogleGenAI({
+        const ai = new GoogleGenAI({
           apiKey: geminiKey,
           httpOptions: {
             headers: {
@@ -255,7 +231,7 @@ ${recentTurns}
       return;
     }
     try {
-      const ai = new import_genai.GoogleGenAI({
+      const ai = new GoogleGenAI({
         apiKey,
         httpOptions: {
           headers: {
@@ -279,8 +255,8 @@ ${recentTurns}
       res.json(fallbackResult);
     }
   });
-  const distPath = import_path.default.join(__dirname, "dist");
-  const useProdStatic = process.env.NODE_ENV === "production" || Boolean(process.env.RENDER) || Boolean(process.argv[1]?.endsWith("server.js")) && import_fs.default.existsSync(import_path.default.join(distPath, "index.html"));
+  const distPath = path.join(__dirname, "dist");
+  const useProdStatic = process.env.NODE_ENV === "production" || Boolean(process.env.RENDER) || Boolean(process.argv[1]?.endsWith("server.js")) && fs.existsSync(path.join(distPath, "index.html"));
   if (!useProdStatic) {
     const { createServer: createViteServer } = await import("vite");
     const vite = await createViteServer({
@@ -289,9 +265,9 @@ ${recentTurns}
     });
     app.use(vite.middlewares);
   } else {
-    app.use(import_express.default.static(distPath));
+    app.use(express.static(distPath));
     app.get("*", (_req, res) => {
-      res.sendFile(import_path.default.join(distPath, "index.html"));
+      res.sendFile(path.join(distPath, "index.html"));
     });
   }
   app.listen(PORT, "0.0.0.0", () => {
